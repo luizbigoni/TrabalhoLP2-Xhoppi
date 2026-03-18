@@ -1,4 +1,4 @@
-import FuncionarioModel from "./FuncionaroSchema";
+import FuncionarioModel from './FuncionaroSchema.js';
 
 class Funcionario{
     #nome;

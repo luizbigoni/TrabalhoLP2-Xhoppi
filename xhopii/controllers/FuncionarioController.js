@@ -43,3 +43,5 @@ class FuncionarioController{
 
 
 }
+
+export default FuncionarioController;
