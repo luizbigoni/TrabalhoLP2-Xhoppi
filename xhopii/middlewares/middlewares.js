@@ -24,7 +24,7 @@ const rateLimitMiddleware = rateLimit({
 });
 
 
-
+/*
 const logPath = path.join(__dirname, 'access.log');
 try {
     const logDir = path.dirname(logPath);
@@ -34,8 +34,9 @@ try {
     console.error('Não foi possível criar access.log:', err);
 }
 const logFile = fs.createWriteStream(logPath, { flags: 'a' });
+*/
 
-
+const logFile = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags:'a'}); 
 
 const morganMiddleware = morgan('combined', { stream: logFile});
 

@@ -49,6 +49,10 @@ class Funcionario{
         return await FuncionarioModel.findById(id);
     }
 
+    static async findByCpf(cpf){
+        return await FuncionarioModel.findOne({cpf:cpf});
+    }
+
     static async delete(id){
         return await FuncionarioModel.findByIdAndDelete(id);
     }
