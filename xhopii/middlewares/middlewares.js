@@ -1,12 +1,11 @@
 import express from 'express';
-import __dirname from '../utils/pathUtils.js';
+import __dirname from '../utils/pathUtils.js'
 import path from 'path';
 import fs from 'fs';
 import helmet from 'helmet';
 import compression from 'compression';
 import rateLimit from 'express-rate-limit';
 import morgan from 'morgan';
-
 //Middlewares
 const staticMiddleware = express.static(path.join(__dirname, 'assets'));
 
