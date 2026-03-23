@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="icon" href="/img/logo.png" type="image/png">
+    <title>Xhopii - Recuperação de Senha</title>
+    <style>
+        /* Um CSS rapidinho só pra centralizar e deixar a mensagem elegante */
+        .box-resultado {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 4px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 100%;
+        }
+        .senha-destaque {
+            color: #ee4d2d; /* Laranja da Xhopii */
+            font-size: 32px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        #botao-voltar {
+            text-decoration: none;
+            display: inline-block;
+            line-height: 40px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header class="cabecalho-login">
+        <section id="cabecalho-login-logo">
+            <img src="/img/logo.png">
+            <h1>Xhopii</h1>
+            <p>Recuperação de Senha</p>
+        </section>
+        <section id="cabecalho-login-ajuda">
+            <p>Precisa de ajuda?</p>
+        </section>
+    </header>
+
+    <section class="conteudo-redefinir-senha">
+        <section class="form-redefinir-senha">
+            
+            <div class="box-resultado">
+                <% if (erro) { %>
+                    <h2 style="color: #333;"><%= mensagem %></h2>
+                    <br>
+                    <a href="/recuperar-senha" id="botao-log" style="text-decoration: none; display: inline-block; line-height: 40px; text-align: center;">Tentar Novamente</a>
+                <% } else { %>
+                    <h2 style="color: #333;">Sua senha foi encontrada!</h2>
+                    <p class="senha-destaque"><%= senha %></p>
+                    <a href="/login" id="botao-log" style="text-decoration: none; display: inline-block; line-height: 40px; text-align: center;">Voltar para o Login</a>
+                <% } %>
+            </div>
+
+        </section>
+    </section>
+
+    <footer class="rodape">
+        <section class="conteudo-rodape-info">
+            <section class="conteudo-rodape">
+                <h5 id="rodape-titulo">Atendimento ao cliente</h5>
+                <a href="#">Central de Ajuda</a>
+                <a href="#">Como Comprar</a>
+                <a href="#">Métodos de Paramento</a>
+                <a href="#">Garantia Xhopii</a>
+                <a href="#">Devolução e Reembolso</a>
+                <a href="#">Fale Conosco</a>
+                <a href="#">Ouridoria</a>
+                <a href="#">Preferências de cookies</a>
+            </section>
+            <section class="conteudo-rodape">
+                <h5 id="rodape-titulo">Sobre a Xhopii</h5>
+                <a href="#">Sobre Nós</a>
+                <a href="#">Políticas Xhopii</a>
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Programa de Ailiados da Xhopii</a>
+                <a href="#">Seja um Entregador Xhopii</a>
+                <a href="#">Ofertas Relâmpago</a>
+                <a href="#">Xhopii Blog</a>
+                <a href="#">Impresa</a>
+            </section>
+            <section class="conteudo-rodape">
+                <h5 id="rodape-titulo">Pagamento</h5>
+                <section class="conteudo-rodape-pagamento">
+                    <img id="img-pagamento" src="/img/logo-visa.png">
+                    <img id="img-pagamento" src="/img/logo-mastercard.png">
+                    <img id="img-pagamento" src="/img/logo-hipercard.png">
+                    <img id="img-pagamento" src="/img/logo-elo.png">
+                    <img id="img-pagamento" src="/img/logo-american-express.png">
+                    <img id="img-pagamento" src="/img/logo-boleto.png">
+                    <img id="img-pagamento" src="/img/logo-pix.png">
+                </section>               
+            </section>
+            <section class="conteudo-rodape">
+                <h5 id="rodape-titulo">Siga-nos</h5>
+                <a href="#"><img id="img-sociais" src="/img/logo-instagram.png">Instagram</a>
+                <a href="#"><img id="img-sociais" src="/img/logo-tiktok.png">Tik Tok</a>
+                <a href="#"><img id="img-sociais" src="/img/logo-twitter.png">X/Twitter</a>
+                <a href="#"><img id="img-sociais" src="/img/logo-facebook.png">Facebook</a>
+                <a href="#"><img id="img-sociais" src="/img/logo-linkedln.png">Linkedln</a>
+            </section>
+            <section class="conteudo-rodape">
+                <h5 id="rodape-titulo">Atendimento ao cliente</h5>
+                <img id="img-store" src="/img/qr-code.png">
+                <img id="img-store" src="/img/logo-store-apple.png">
+                <img id="img-store" src="/img/logo-google-play.png">
+            </section>
+        </section>
+        <hr>
+        <p>© 2025 Xhopii. Todos os direitos acadêmicos reservados</p>
+    </footer>
+</body>
+</html>

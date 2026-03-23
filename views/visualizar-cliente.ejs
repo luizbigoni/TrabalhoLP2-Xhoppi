@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="icon" href="../img/logo.png" type="image/png">
+    <title>Xhopii - Ver Clientes</title>
+</head>
+<body>
+
+    <header>
+        <section id="cabecalho-logo">
+            <img src="../img/logo.png">
+            <h1>Xhopii</h1>
+        </section>
+        <section id="cabecalho-logout">
+            <a href="logout">Sair</a>
+        </section>
+    </header>
+
+    <nav class="menu-horizontal">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/clientes/cadastrar">Cadastro Cliente</a></li>
+            <li><a href="/funcionario/cadastrar">Cadastro Funcionário</a></li>
+            <li><a href="/produto/cadastrar">Cadastro Produto</a></li>
+            <li><a href="/cupom/cadastrar">Cadastro Cupom</a></li>
+            <li><a href="/clientes-list">Ver Clientes</a></li>
+            <li><a href="/funcionarios-list">Ver Funcionários</a></li>
+            <li><a href="/produtos-list">Ver Produtos</a></li>
+            <li><a href="/cupons-list">Ver Cupons</a></li>
+        </ul>
+    </nav>
+
+    <section class="conteudo-visualizar">
+        <section class="conteudo-visualizar-box">
+            <h1>Clientes</h1>
+            <% if (clientes && clientes.length > 0) { %>
+                <table class="table-visualizar">
+                    <thead>
+                        <tr>
+                            <th>Foto</th>
+                            <th>Nome</th>
+                            <th>CPF</th>
+                            <th>Data Nasc.</th>
+                            <th>Telefone</th>
+                            <th>E-mail</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% clientes.forEach(cliente => { %>
+                            <tr>
+                                <td><img src="/img/<%= cliente.inputFoto %>" alt="Foto do Cliente" class="avatar-perfil"></td>
+                                <td><%= cliente.nome %> <%= cliente.sobrenome %></td>
+                                <td><%= cliente.CPF %></td>
+                                <td><%= cliente.dataNascimento %></td>
+                                <td><%= cliente.telefone %></td>
+                                <td><%= cliente.email %></td>
+                                <td>
+                                    <a href="/clientes/editar/<%= cliente._id %>" class="btn-editar">Editar</a>
+                                    <button class="btn-excluir btn-excluir-func" data-id="<%= cliente._id %>">Excluir</button>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            <% } else { %>
+                <p style="margin-top: 20px; color: #666;">Nenhum cliente cadastrado no sistema ainda.</p>
+            <% } %>
+        </section>
+    </section>
+
+    <footer class="rodape">
+        <section class="conteudo-rodape-info">
+            <section class="conteudo-rodape">
+                <h5 id="rodape-titulo">Atendimento ao cliente</h5>
+                <a href="#">Central de Ajuda</a>
+                <a href="#">Como Comprar</a>
+                <a href="#">Métodos de Paramento</a>
+                <a href="#">Garantia Xhopii</a>
+                <a href="#">Devolução e Reembolso</a>
+                <a href="#">Fale Conosco</a>
+                <a href="#">Ouridoria</a>
+                <a href="#">Preferências de cookies</a>
+            </section>
+            <section class="conteudo-rodape">
+                <h5 id="rodape-titulo">Sobre a Xhopii</h5>
+                <a href="#">Sobre Nós</a>
+                <a href="#">Políticas Xhopii</a>
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Programa de Ailiados da Xhopii</a>
+                <a href="#">Seja um Entregador Xhopii</a>
+                <a href="#">Ofertas Relâmpago</a>
+                <a href="#">Xhopii Blog</a>
+                <a href="#">Impresa</a>
+            </section>
+            <section class="conteudo-rodape">
+                <h5 id="rodape-titulo">Pagamento</h5>
+                <section class="conteudo-rodape-pagamento">
+                    <img id="img-pagamento" src="/img/logo-visa.png">
+                    <img id="img-pagamento" src="/img/logo-mastercard.png">
+                    <img id="img-pagamento" src="/img/logo-hipercard.png">
+                    <img id="img-pagamento" src="/img/logo-elo.png">
+                    <img id="img-pagamento" src="/img/logo-american-express.png">
+                    <img id="img-pagamento" src="/img/logo-boleto.png">
+                    <img id="img-pagamento" src="/img/logo-pix.png">
+                </section>               
+            </section>
+            <section class="conteudo-rodape">
+                <h5 id="rodape-titulo">Siga-nos</h5>
+                <a href="#"><img id="img-sociais" src="/img/logo-instagram.png">Instagram</a>
+                <a href="#"><img id="img-sociais" src="/img/logo-tiktok.png">Tik Tok</a>
+                <a href="#"><img id="img-sociais" src="/img/logo-twitter.png">X/Twitter</a>
+                <a href="#"><img id="img-sociais" src="/img/logo-facebook.png">Facebook</a>
+                <a href="#"><img id="img-sociais" src="/img/logo-linkedln.png">Linkedln</a>
+            </section>
+            <section class="conteudo-rodape">
+                <h5 id="rodape-titulo">Atendimento ao cliente</h5>
+                <img id="img-store" src="/img/qr-code.png">
+                <img id="img-store" src="/img/logo-store-apple.png">
+                <img id="img-store" src="/img/logo-google-play.png">
+            </section>
+        </section>
+        <hr>
+        <p>© 2025 Xhopii. Todos os direitos acadêmicos reservados</p>
+    </footer>
+    <script src="/js/excluirCliente.js"></script>
+</body>
+</html>
