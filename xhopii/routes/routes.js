@@ -4,9 +4,24 @@ import __dirname from '../utils/pathUtils.js';
 import ClienteController from '../controllers/ClienteController.js';
 import FuncionarioController from "../controllers/FuncionarioController.js";
 import ProdutoController from '../controllers/ProdutoController.js';
+import CupomController from "../controllers/CupomController.js";
+import multer from 'multer';
 //import CupomController from '../controllers/CupomController.js';
 //import FuncionarioController from '../controllers/FuncionarioController.js';
 //import ProdutoController from '../controllers/FuncionarioController.js';
+
+// Configuração de onde o multer vai salvar as fotos
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        // Ele vai salvar dentro da sua pasta assets/img
+        cb(null, path.join(__dirname, 'assets', 'img')); 
+    },
+    filename: function (req, file, cb) {
+        // Coloca a data atual na frente do nome para não ter fotos com nomes iguais
+        cb(null, Date.now() + '-' + file.originalname); 
+    }
+});
+const upload = multer({ storage: storage });
 
 const router = express.Router();
 
@@ -19,13 +34,13 @@ router.get('/', (req, res) => {
 router.get('/clientes/cadastrar', ClienteController.renderCreateCliente); 
 router.get('/clientes-list', ClienteController.renderAllCliente);
 
-router.get('/clientesBusca', ClienteController.getAllCliente);
-router.post('/clientesCreate', ClienteController.createCliente);
+router.get('/clientes', ClienteController.getAllCliente);
+router.post('/clientes-create', ClienteController.createCliente);
 router.get('/clientes/:id', ClienteController.getClienteById); 
 router.put('/clientes/:id', ClienteController.updateCliente);
 router.delete('/clientes/:id', ClienteController.deleteCliente);
 
-/*
+
 //Rotas de Cupom:
 router.get('/cupons', CupomController.getAllCupom);
 router.get('/cupons/:id', CupomController.getCupomById);
@@ -33,9 +48,9 @@ router.post('/cupons', CupomController.createCupom);
 router.put('/cupons/:id', CupomController.updateCupom);
 router.delete('/cupons/:id', CupomController.deleteCupom)
 
-router.get('/cupons-create', CupomController.renderCreateCupom);
+router.get('/cupom/cadastrar', CupomController.renderCreateCupom);
 router.get('/cupons-list', CupomController.renderAllCupom);
-*/
+
 
 //Rotas de Funcionário:
 router.get('/funcionario/cadastrar', FuncionarioController.renderCreateFuncionario); 
@@ -55,8 +70,12 @@ router.get('/produto/cadastrar', ProdutoController.renderCreateProduto);
 router.get('/produtos-list', ProdutoController.renderAllProduto);
 
 router.get('/produtosBusca', ProdutoController.getAllProdutos);
-router.post('/produto/cadastrar', ProdutoController.createProduto); 
+router.post('/produto/cadastrar', upload.single('foto'), ProdutoController.createProduto);
+
+router.get('/produtos/editar/:id', ProdutoController.renderEditProduto);
+
 router.get('/produtos/:id', ProdutoController.getProdutoById);
 router.put('/produtos/:id', ProdutoController.updateProduto); 
 router.delete('/produtos/:id', ProdutoController.deleteProduto);
+
 export default router;

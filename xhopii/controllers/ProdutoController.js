@@ -30,7 +30,8 @@ class ProdutoController {
 
     static async createProduto(req, res) {
         try {
-            const { nome, fabricante, descricao, valor, quantidade, foto } = req.body;
+            const { nome, fabricante, descricao, valor, quantidade} = req.body;
+            const foto = req.file ? req.file.filename : 'padrao.png';
             const novoProduto = new Produto(nome, fabricante, descricao, valor, quantidade, foto);
             await novoProduto.save();
             res.status(201).json(novoProduto);
@@ -40,11 +41,31 @@ class ProdutoController {
         }
     }
 
+    static async renderEditProduto(req, res) {
+        try {
+            const { id } = req.params;
+            // Puxa os dados do produto específico do banco de dados
+            const produtoExistente = await Produto.findById(id); 
+
+            if (!produtoExistente) {
+                return res.status(404).send('Produto não encontrado!');
+            }
+
+            // Renderiza o EJS de edição passando os dados para os inputs
+            res.render('editar-produto', { produto: produtoExistente });
+        } catch (error) {
+            console.error('Erro ao carregar a página de edição:', error);
+            res.status(500).send('Erro interno');
+        }
+    }
+
     static async updateProduto(req, res) {
         try {
             const { id } = req.params;
             const dadosAtualizados = req.body;
             const produtoAtualizado = await Produto.update(id, dadosAtualizados);
+
+            console.log("DADOS CHEGANDO PARA ATUALIZAR:", dadosAtualizados);
 
             if (!produtoAtualizado) {
                 return res.status(404).json({ message: 'Produto não encontrado para atualização' });

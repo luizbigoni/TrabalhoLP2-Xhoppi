@@ -30,6 +30,7 @@ class ClienteController{
 
     static async createCliente(req,res){ //cria um cliente novo
         try{
+            console.log(req.body)
             const {nome, sobrenome, CPF, dataNascimento, telefone, email, senha, inputFoto} = req.body;
             const clienteExistente = await  Cliente.findByCPF(CPF);
 
@@ -39,7 +40,8 @@ class ClienteController{
             else{
                 const novoCliente = new Cliente(nome, sobrenome, CPF, dataNascimento, telefone, email, senha, inputFoto);
                 await novoCliente.save();
-                res.status(201).json(novoCliente);
+                res.redirect('/clientes-list');
+               // res.status(201).json(novoCliente);
             }
         }catch(error){
             console.error('Erro ao cadastrar cliente', error);

@@ -26,7 +26,7 @@ class Funcionario{
     }
 
     async save(){
-        const novoFuncionario=new Funcionario({
+        const novoFuncionario=new FuncionarioModel({
             nome: this.#nome,
             sobrenome: this.#sobrenome,
             cpf: this.#cpf,

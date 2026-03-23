@@ -25,27 +25,29 @@
             <li><a href="/funcionario/cadastrar">Cadastro Funcionário</a></li>
             <li><a href="/produto/cadastrar">Cadastro Produto</a></li>
             <li><a href="/cupom/cadastrar">Cadastro Cupom</a></li>
-            <li><a href="/clientes">Ver Clientes</a></li>
-            <li><a href="#">Ver Funcionários</a></li>
-            <li><a href="#">Ver Produtos</a></li>
+            <li><a href="/clientes-list">Ver Clientes</a></li>
+            <li><a href="/funcionarios-list">Ver Funcionários</a></li>
+            <li><a href="produtos-list">Ver Produtos</a></li>
+            <li><a href="/cupons-list">Ver Cupons</a></li>
         </ul>
     </nav>
 
     <section class="conteudo-cadastro">
         <section class="conteudo-formulario-cadastro">
-            <form method="POST" action="">
+            <form method="POST" action="/funcionario/cadastrar">
                 <label>Cadastrar Funcionário</label>
-                <input type="text" placeholder="Nome" name="inputNomeFunc">
-                <input type="text" placeholder="Sobrenome" name="inputSobrenomeFunc">
-                <input type="text" placeholder="CPF" name="inputCPFFunc">
-                <input type="date" placeholder="Data Nascimento" name="inputDataNascFunc">
-                <input type="text" placeholder="Telefone" name="inputTelefoneFunc">
-                <input type="text" placeholder="Cargo / Função" name="inputCargoFunc">
-                <input type="text" placeholder="Salário" name="inputSalarioFunc">
-                <input type="text" placeholder="Email" name="inputEmailFunc">
-                <input type="password" placeholder="Senha" name="inputSenha">
+                <input type="text" placeholder="Nome" name="nome" required>
+                <input type="text" placeholder="Sobrenome" name="sobrenome" required>
+                <input type="text" placeholder="CPF" name="cpf" required>
+                <input type="date" placeholder="Data Nascimento" name="dataNascimento" required>
+                <input type="text" placeholder="Telefone" name="telefone" required>
+                <input type="text" placeholder="Cargo / Função" name="cargo" required>
+                <input type="text" placeholder="Salário" name="salario" required>
+                <input type="text" placeholder="Email" name="email" required>
+                <input type="password" placeholder="Senha" name="senha" required>
+                
                 <label id="lbl-arquivo" for="files">Selecionar foto de perfil:</label>
-                <input type="file" name="inputFoto">
+                <input type="file" name="fotoPerfil">
                 <input id="botao" type="submit" value="Cadastrar">
             </form>
         </section>

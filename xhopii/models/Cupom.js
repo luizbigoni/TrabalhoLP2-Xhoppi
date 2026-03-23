@@ -21,13 +21,12 @@ class Cupom{
     }
 
     static async findAll(){
-        return await CupomModel.findAll();
+        return await CupomModel.find();
     }
 
-    static async findByCodigo(CPF){
-        return await CupomModel.findOne({codido : codigo});
+   static async findByCodigo(codigo){
+        return await CupomModel.findOne({ codigo: codigo }); 
     }
-
     static async findById(id){
         return await CupomModel.findById(id);
     }

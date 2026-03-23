@@ -25,26 +25,28 @@
             <li><a href="/funcionario/cadastrar">Cadastro Funcionário</a></li>
             <li><a href="/produto/cadastrar">Cadastro Produto</a></li>
             <li><a href="/cupom/cadastrar">Cadastro Cupom</a></li>
-            <li><a href="/clientes">Ver Clientes</a></li>
-            <li><a href="#">Ver Funcionários</a></li>
-            <li><a href="#">Ver Produtos</a></li>
+            <li><a href="/clientes-list">Ver Clientes</a></li>
+            <li><a href="/funcionarios-list">Ver Funcionários</a></li>
+            <li><a href="produtos-list">Ver Produtos</a></li>
             <li><a href="/cupons-list">Ver Cupons</a></li>
         </ul>
     </nav>
 
     <section class="conteudo-cadastro">
         <section class="conteudo-formulario-cadastro">
-            <form method="POST" action="">
+           <form action="/produto/cadastrar" method="POST" enctype="multipart/form-data">
                 <label>Cadastrar Produto</label>
-                <input type="text" placeholder="Nome" name="inputNomeProd">
-                <input type="text" placeholder="Fabricante" name="inputFabricanteProd">
-                <input type="text" placeholder="Descrição" name="inputDescricaoProd">
-                <input type="text" placeholder="Valor" name="inputValorProd">
-                <input type="text" placeholder="Quantidade" name="inputQtdProd">
+                <input type="text" placeholder="Nome" name="nome" required>
+                <input type="text" placeholder="Fabricante" name="fabricante" required>
+                <input type="text" placeholder="Descrição" name="descricao" required>
+                <input type="number" step="0.01" placeholder="Valor" name="valor" required>
+                <input type="number" placeholder="Quantidade" name="quantidade" required>
+                
                 <label id="lbl-arquivo" for="files">Selecionar foto do produto:</label>
-                <input type="file" name="inputFoto">
+                <input type="file" name="foto" id="files" required>
+                
                 <input id="botao" type="submit" value="Cadastrar">
-            </form>
+        </form>
         </section>
     </section>
 

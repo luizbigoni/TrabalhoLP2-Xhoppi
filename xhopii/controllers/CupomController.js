@@ -39,7 +39,9 @@ class CupomController{
             else{
                 const novoCupom = new Cupom(codigo, descricao, porcentagem);
                 await novoCupom.save();
-                res.status(201).json(novoCupom);
+                //res.status(201).json(novoCupom);
+                res.redirect('/cupons');
+                
             }
         }catch(error){
             console.error('Erro ao cadastrar cupom', error);

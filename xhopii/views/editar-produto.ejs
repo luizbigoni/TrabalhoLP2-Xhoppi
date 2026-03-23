@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>Xhopii - Editar Produto</title>
+</head>
+<body>
+    <header>
+        <section id="cabecalho-logo">
+            <img src="/img/logo.png">
+            <h1>Xhopii</h1>
+        </section>
+        <section id="cabecalho-logout">
+            <a href="/login">Sair</a>
+        </section>
+    </header>
+
+    <section class="conteudo-cadastro">
+        <section class="conteudo-formulario-cadastro">
+            
+            <form id="form-editar" onsubmit="salvarEdicao(event, '<%= produto._id %>')">
+                <label>Editar Produto</label>
+                
+                <input type="text" placeholder="Nome do Produto" name="nome" value="<%= produto.nome %>" required>
+                <input type="text" placeholder="Fabricante" name="fabricante" value="<%= produto.fabricante %>" required>
+                <input type="text" placeholder="Descrição" name="descricao" value="<%= produto.descricao %>" required>
+                <input type="text" placeholder="Valor (R$)" name="valor" value="<%= produto.valor %>" required>
+                <input type="number" placeholder="Quantidade" name="quantidade" value="<%= produto.quantidade %>" required>
+                
+                <label id="lbl-arquivo">Foto do produto (URL/Nome):</label>
+                <input type="text" name="foto" value="<%= produto.foto %>" required>
+                
+                <input id="botao" type="submit" value="Salvar Alterações">
+            </form>
+
+        </section>
+    </section>
+
+    <script>
+        async function salvarEdicao(event, id) {
+            event.preventDefault(); // Trava o recarregamento da página
+
+            // Pega o formulário
+            const form = document.getElementById('form-editar');
+            const formData = new FormData(form);
+            
+            // Transforma os dados no formato padrão de formulário web (URL Encoded)
+            const dadosFormatados = new URLSearchParams(formData).toString();
+
+            try {
+                const resposta = await fetch(`/produtos/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        // O SEGREDO ESTÁ NESTA LINHA:
+                        'Content-Type': 'application/x-www-form-urlencoded' 
+                    },
+                    body: dadosFormatados
+                });
+
+                if (resposta.ok) {
+                    alert('Produto atualizado com sucesso!');
+                    window.location.href = '/produtos-list'; // Redireciona para a tabela
+                } else {
+                    alert('Erro ao atualizar o produto.');
+                }
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+                alert('Erro de comunicação com o servidor.');
+            }
+        }
+    </script>
+</body>
+</html>

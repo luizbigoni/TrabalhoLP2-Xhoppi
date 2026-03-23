@@ -39,7 +39,8 @@ class FuncionarioController{
              else{
                 const novoFuncionario = new Funcionario(nome,sobrenome,cpf,dataNascimento,telefone,cargo,salario,email,senha,fotoPerfil);
                 await novoFuncionario.save();
-                res.status(201).json(novoFuncionario);
+                res.redirect('/funcionarios-list');
+                //res.status(201).json(novoFuncionario);
             }
         }catch(error){
             console.error('Erro ao cadastrar funcionario', error);
