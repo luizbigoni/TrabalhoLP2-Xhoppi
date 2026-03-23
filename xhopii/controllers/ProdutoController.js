@@ -34,7 +34,8 @@ class ProdutoController {
             const foto = req.file ? req.file.filename : 'padrao.png';
             const novoProduto = new Produto(nome, fabricante, descricao, valor, quantidade, foto);
             await novoProduto.save();
-            res.status(201).json(novoProduto);
+            res.redirect('/produtos-list');
+            //res.status(201).json(novoProduto);
         } catch (error) {
             console.error('Erro ao cadastrar produto', error);
             res.status(500).send('Erro interno ao salvar produto');
@@ -60,22 +61,31 @@ class ProdutoController {
     }
 
     static async updateProduto(req, res) {
-        try {
-            const { id } = req.params;
-            const dadosAtualizados = req.body;
-            const produtoAtualizado = await Produto.update(id, dadosAtualizados);
+    try {
+        const { id } = req.params;
 
-            console.log("DADOS CHEGANDO PARA ATUALIZAR:", dadosAtualizados);
+        const dadosAtualizados = {
+            nome: req.body.nome,
+            fabricante: req.body.fabricante,
+            descricao: req.body.descricao,
+            valor: req.body.valor,
+            quantidade: req.body.quantidade
+        };
 
-            if (!produtoAtualizado) {
-                return res.status(404).json({ message: 'Produto não encontrado para atualização' });
-            }
-            res.json({ message: 'Produto atualizado com sucesso!', produto: produtoAtualizado });
-        } catch (error) {
-            console.error('Erro ao atualizar produto', error);
-            res.status(500).json({ message: 'Erro interno ao atualizar produto' });
+        // Se enviou nova foto
+        if (req.file) {
+            dadosAtualizados.foto = req.file.filename;
         }
+
+        await Produto.update(id, dadosAtualizados);
+
+        res.json({ message: "Produto atualizado com sucesso!" });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Erro ao atualizar produto" });
     }
+}
 
     static async deleteProduto(req, res) {
         try {
@@ -111,6 +121,16 @@ class ProdutoController {
             res.status(500).send('Erro interno');
         }
     }
+
+    static async getAllProdutosHome() {
+    try {
+        return await Produto.findAll();
+    } catch (error) {
+        console.error(error);
+        return [];
+    }
+}
+
 }
 
 export default ProdutoController;

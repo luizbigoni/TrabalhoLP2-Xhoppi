@@ -339,37 +339,41 @@ body{
     border: 2px solid rgb(251,86,48);
 }
 
-.conteudo-home .conteudo-home-descobertas .conteudo-home-descobertas-produto{
+.conteudo-home .conteudo-home-descobertas .conteudo-home-descobertas-produto {
     display: grid;
-    grid-gap: 0.75em;
-    grid-template-columns: auto auto auto auto auto;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-gap: 20px;
     margin-left: 1em;
-
+    padding-right: 1em; 
 }
 
-.conteudo-home .conteudo-home-descobertas .conteudo-home-descobertas-produto .produto-item-grid{
-    width: 90%;
-    height: 250px;
+.conteudo-home .conteudo-home-descobertas .conteudo-home-descobertas-produto .produto-item-grid {
+    width: 100%; 
+    
+    height: auto; 
+    min-height: auto; 
+    padding: 15px; 
     box-sizing: border-box;
     box-shadow: 0px 5px 10px 0px rgba(0,0,0,.14);
     border-radius: 4px;
     text-decoration: none;
-    margin-bottom: 5vh;
 }
 
-.conteudo-home .conteudo-home-descobertas .conteudo-home-descobertas-produto .produto-item-grid:hover{
+.conteudo-home .conteudo-home-descobertas .conteudo-home-descobertas-produto .produto-item-grid:hover {
     border: 2px solid rgb(251,86,48);
 }
 
-.produto-item-grid img{
-    width: 90%;
-    height: 125px;
+.produto-item-grid img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain; 
+    margin-bottom: 10px;
 }
 
-.produto-item-grid p{
+.produto-item-grid p {
     font-size: 14px;
-    margin-left: 0.5em;
     color: rgba(0,0,0,.65);
+    margin: 5px 0; 
 }
 
 .produto-item-info{
@@ -852,4 +856,134 @@ header #cabecalho-logout a{
     margin-bottom: 10px;
     font-size: 1.875rem;
     color: rgb(251,86,48);
+}
+
+.btn-excluir-funcionario {
+    color: red;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-excluir-cliente {
+    color: red;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-excluir-cupom {
+    color: red;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-excluir {
+    color: red;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Caixa do cupom */
+/* Caixa do cupom */
+.cupom-box {
+    display: flex;
+    align-items: center; /* O SEGREDO 1: Impede o botão de esticar verticalmente */
+    justify-content: space-between;
+    gap: 8px; /* Espaço entre o input e o botão */
+    margin-top: 15px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 3. O INPUT DO CUPOM */
+.input-cupom {
+    flex: 1; /* Manda o input ocupar apenas o espaço que sobrar */
+    min-width: 0; /* O SEGREDO 2: Impede o input de empurrar o botão pra fora da caixa */
+    height: 32px; /* Define uma altura exata... */
+    padding: 0 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 13px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+/* 4. O BOTÃO DE APLICAR */
+.btn-aplicar-cupom {
+    height: 32px; /* ...e usa a MESMA altura aqui para ficarem perfeitos lado a lado! */
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    padding: 0 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+.btn-aplicar-cupom:hover {
+    background-color: #e65c00;
+}
+
+.resultado-cupom {
+    font-size: 12px;
+    color: green;
+    margin-top: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.conteudo-ver .conteudo-ver-descobertas .conteudo-ver-descobertas-produto {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-gap: 20px; 
+    padding: 20px;
+    
+    width: 100%; 
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.ver-grupo-dupla-grid {
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+    margin-bottom: 8px;
+}
+
+.ver-grupo-dupla-grid h5, 
+.ver-grupo-dupla-grid p {
+    margin: 0; 
+    font-size: 13px;
+    text-align: left;
+}
+
+.ver-grupo-dupla-grid h5 {
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap;
+}
+
+.ver-grupo-dupla-grid p {
+    color: #666;
+    word-break: break-word;
+}
+
+
+.avatar-perfil {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; 
+    object-fit: cover; 
+    border: 2px solid #ff6600;
+    margin-bottom: 10px;
 }

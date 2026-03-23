@@ -27,7 +27,7 @@
             <li><a href="/cupom/cadastrar">Cadastro Cupom</a></li>
             <li><a href="/clientes-list">Ver Clientes</a></li>
             <li><a href="/funcionarios-list">Ver Funcionários</a></li>
-            <li><a href="produtos-list">Ver Produtos</a></li>
+            <li><a href="/produtos-list">Ver Produtos</a></li>
             <li><a href="/cupons-list">Ver Cupons</a></li>
         </ul>
     </nav>
@@ -43,7 +43,9 @@
                     
                     <div class="acoes">
                         <a href="/cupons/editar/<%= cupom._id %>" class="btn-editar">Editar</a>
-                        <button onclick="deletarCupom('<%= cupom._id %>')" class="btn-excluir">Excluir</button>
+                        <button class="btn-excluir-cupom" data-id="<%= cupom._id %>">
+                            🗑️ Excluir
+                        </button>
                     </div>
                 </section>
             <% }); %>
@@ -104,6 +106,6 @@
         <hr>
         <p>© 2025 Xhopii. Todos os direitos acadêmicos reservados</p>
     </footer>
-
+    <script src="/js/excluirCupom.js"></script>
 </body>
 </html>

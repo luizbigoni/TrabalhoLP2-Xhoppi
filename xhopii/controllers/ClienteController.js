@@ -13,7 +13,7 @@ class ClienteController{
         }
     }
 
-    static async getClienteById(req, res){ //tras apenas um cliente
+    static async getClienteById(req, res){ //traz apenas um cliente
         try{
             const {id} = req.params;
             const clienteExistente = await Cliente.findById(id);
@@ -31,7 +31,8 @@ class ClienteController{
     static async createCliente(req,res){ //cria um cliente novo
         try{
             console.log(req.body)
-            const {nome, sobrenome, CPF, dataNascimento, telefone, email, senha, inputFoto} = req.body;
+            const {nome, sobrenome, CPF, dataNascimento, telefone, email, senha} = req.body;
+            const inputFoto = req.file ? req.file.filename : 'avatar-padrao.png';
             const clienteExistente = await  Cliente.findByCPF(CPF);
 
             if(clienteExistente){
@@ -49,21 +50,38 @@ class ClienteController{
         }
     }
 
-    static async updateCliente(req,res){ //atualizar um cliente 
-        try{
-            const {id} = req.params;
-            const dadosAtualizados = req.body;
-            const clienteAtualizado = await Cliente.update(id, dadosAtualizados);
+    static async updateCliente(req, res) {
+    try {
+        const { id } = req.params;
 
-            if(!clienteAtualizado){
-                return res.status(404).json({message: 'Cliente não encontrado para atualização'});
-            }
-            res.json({message: 'Cliente atualizado com sucesso!', cliente: clienteAtualizado});
-        }catch(error){
-            console.error('Erro ao atualizar cliente', error);
-            res.status(500).json({ message: 'Erro interno ao atualizar cliente'});
+        const dadosAtualizados = {
+            nome: req.body.nome,
+            sobrenome: req.body.sobrenome,
+            CPF: req.body.CPF,
+            dataNascimento: req.body.dataNascimento,
+            telefone: req.body.telefone,
+            email: req.body.email
+        };
+
+        // Só atualiza senha se foi digitada
+        if (req.body.senha && req.body.senha.trim() !== "") {
+            dadosAtualizados.senha = req.body.senha;
         }
+
+        // Só atualiza foto se enviou nova
+        if (req.file) {
+            dadosAtualizados.inputFoto = req.file.filename;
+        }
+
+        await Cliente.update(id, dadosAtualizados);
+
+        res.json({ message: "Cliente atualizado com sucesso!" });
+
+    } catch (error) {
+        console.error("Erro ao atualizar cliente:", error);
+        res.status(500).json({ message: "Erro interno" });
     }
+}
 
     static async deleteCliente(req,res){ //excluir um cliente
         try{
@@ -100,6 +118,27 @@ class ClienteController{
             res.status(500).send('Erro interno');
         }
     }
+
+    static async renderEditCliente(req, res) {
+        try {
+            const { id } = req.params;
+            const clienteExistente = await Cliente.findById(id); 
+
+            if (!clienteExistente) {
+                return res.status(404).send('Cliente não encontrado!');
+            }
+
+            // Envia os dados para a tela de edição
+            res.render('editar-cliente', { cliente: clienteExistente });
+        } catch (error) {
+            console.error('Erro ao carregar a página de edição de cliente:', error);
+            res.status(500).send('Erro interno');
+        }
+    }
+
+
 }
+
+
 
 export default ClienteController;

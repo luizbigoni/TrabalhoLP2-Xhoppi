@@ -34,7 +34,7 @@
 
     <section class="conteudo-cadastro">
         <section class="conteudo-formulario-cadastro">
-            <form method="POST" action="/funcionario/cadastrar">
+            <form method="POST" action="/funcionario/cadastrar" enctype="multipart/form-data">
                 <label>Cadastrar Funcionário</label>
                 <input type="text" placeholder="Nome" name="nome" required>
                 <input type="text" placeholder="Sobrenome" name="sobrenome" required>
@@ -45,9 +45,9 @@
                 <input type="text" placeholder="Salário" name="salario" required>
                 <input type="text" placeholder="Email" name="email" required>
                 <input type="password" placeholder="Senha" name="senha" required>
-                
+
                 <label id="lbl-arquivo" for="files">Selecionar foto de perfil:</label>
-                <input type="file" name="fotoPerfil">
+                <input type="file" name="fotoPerfil" accept="image/*">
                 <input id="botao" type="submit" value="Cadastrar">
             </form>
         </section>

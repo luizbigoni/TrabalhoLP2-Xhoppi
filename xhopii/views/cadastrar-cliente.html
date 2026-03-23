@@ -34,7 +34,7 @@
 
     <section class="conteudo-cadastro">
         <section class="conteudo-formulario-cadastro">
-            <form method="POST" action="/clientes-create">
+            <form method="POST" action="/clientes-create" enctype="multipart/form-data">
                 <label>Cadastrar Cliente</label>
                 <input type="text" placeholder="Nome" name="nome">
                 <input type="text" placeholder="Sobrenome" name="sobrenome">
@@ -44,7 +44,7 @@
                 <input type="text" placeholder="Email" name="email">
                 <input type="password" placeholder="Senha" name="senha">
                 <label id="lbl-arquivo" for="files">Selecionar foto de perfil:</label>
-                <input type="file" name="inputFoto">
+                <input type="file" name="inputFoto" accept="image/*">
                 <input id="botao" type="submit" value="Cadastrar">
             </form>
         </section>

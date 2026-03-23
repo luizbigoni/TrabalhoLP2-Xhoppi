@@ -27,7 +27,7 @@
             <li><a href="/cupom/cadastrar">Cadastro Cupom</a></li>
             <li><a href="/clientes-list">Ver Clientes</a></li>
             <li><a href="/funcionarios-list">Ver Funcionários</a></li>
-            <li><a href="produtos-list">Ver Produtos</a></li>
+            <li><a href="/produtos-list">Ver Produtos</a></li>
             <li><a href="/cupons-list">Ver Cupons</a></li>
         </ul>
     </nav>
@@ -36,12 +36,21 @@
         <section class="conteudo-visualizar-box">
             <h1>Clientes</h1>
             <% clientes.forEach(cliente => { %>
-                <section class="conteudo-bloco">
+                <section class="conteudo-bloco" style="position: relative;">
                     <h2><%= cliente.nome %> <%= cliente.sobrenome %></h2>
                     <p>CPF: <%= cliente.cpf %></p>
                     <p>Data Nascimento: <%= cliente.dataNascimento %></p>
                     <p>Telefone: <%= cliente.telefone %></p>
                     <p>E-mail: <%= cliente.email %></p>
+                    <img src="/img/<%= cliente.inputFoto %>" alt="Foto do Cliente" class="avatar-perfil">
+                    
+                    <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #ccc;">
+                        <a href="/clientes/editar/<%= cliente._id %>" style="color: blue; text-decoration: none; font-weight: bold; margin-right: 15px;">✏️ Editar</a>
+                        
+                        <button class="btn-excluir-cliente" data-id="<%= cliente._id %>">
+                            🗑️ Excluir
+                        </button>
+                    </div>
                 </section>
             <% }); %>
         </section>
@@ -101,6 +110,6 @@
         <hr>
         <p>© 2025 Xhopii. Todos os direitos acadêmicos reservados</p>
     </footer>
-
+    <script src="/js/excluirCliente.js"></script>
 </body>
 </html>

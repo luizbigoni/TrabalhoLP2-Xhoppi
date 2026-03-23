@@ -6,6 +6,7 @@
     <link rel="icon" href="/img/logo.png" type="image/png">
     <title>Xhopii - Ver Produtos</title>
 </head>
+
 <body>
 
     <header>
@@ -27,7 +28,7 @@
             <li><a href="/cupom/cadastrar">Cadastro Cupom</a></li>
             <li><a href="/clientes-list">Ver Clientes</a></li>
             <li><a href="/funcionarios-list">Ver Funcionários</a></li>
-            <li><a href="produtos-list">Ver Produtos</a></li>
+            <li><a href="/produtos-list">Ver Produtos</a></li>
             <li><a href="/cupons-list">Ver Cupons</a></li>
         </ul>
     </nav>
@@ -68,7 +69,9 @@
                             <div style="margin-top: 10px; display: flex; justify-content: space-between; padding: 0 10px;">
                                 <a href="/produtos/editar/<%= produto._id %>" style="color: blue; text-decoration: none; font-weight: bold;">✏️ Editar</a>
                                 
-                                <button onclick="excluirProduto('<%= produto._id %>')" style="color: red; background: none; border: none; font-weight: bold; cursor: pointer;">🗑️ Excluir</button>
+                                <button class="btn-excluir" data-id="<%= produto._id %>">
+                                    🗑️ Excluir
+                                </button>
                             </div>
                         </div>
                     <% }) %>
@@ -85,30 +88,7 @@
         <p>© 2026 Xhopii. Todos os direitos acadêmicos reservados</p>
     </footer>
 
-    <script>
-        async function excluirProduto(id) {
-            const confirmacao = confirm("Tem certeza que deseja excluir este produto da loja?");
-            
-            if (confirmacao) {
-                try {
-                    // Batendo na rota DELETE /produtos/:id que está no seu routes.js
-                    const resposta = await fetch(`/produtos/${id}`, {
-                        method: 'DELETE'
-                    });
-
-                    if (resposta.ok) {
-                        alert("Produto excluído com sucesso!");
-                        window.location.reload(); 
-                    } else {
-                        alert("Erro ao excluir o produto.");
-                    }
-                } catch (error) {
-                    console.error("Erro:", error);
-                    alert("Erro de comunicação com o servidor.");
-                }
-            }
-        }
-    </script>
+    <script src="/js/excluir.js"></script>
 
 </body>
 </html>

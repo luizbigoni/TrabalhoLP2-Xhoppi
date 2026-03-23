@@ -32,6 +32,7 @@ app.use(securityMiddleware);
 app.use(compressionMiddlewware);
 //app.use(rateLimitMiddleware);
 app.use(morganMiddleware);
+app.use(express.static('public'));
 
 //Registrando rotas (endpoints)
 app.use(router);

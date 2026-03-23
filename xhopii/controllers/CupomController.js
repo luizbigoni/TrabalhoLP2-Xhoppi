@@ -40,7 +40,7 @@ class CupomController{
                 const novoCupom = new Cupom(codigo, descricao, porcentagem);
                 await novoCupom.save();
                 //res.status(201).json(novoCupom);
-                res.redirect('/cupons');
+                res.redirect('/cupons-list');
                 
             }
         }catch(error){
@@ -101,6 +101,50 @@ class CupomController{
             res.status(500).send('Erro interno');
         }
     }
+
+    static async renderEditCupom(req, res) {
+        try {
+            const { id } = req.params;
+            const cupomExistente = await Cupom.findById(id);
+
+            if (!cupomExistente) {
+                return res.status(404).send('Cupom não encontrado!');
+            }
+
+            res.render('editar-cupom', { cupom: cupomExistente });
+
+        } catch (error) {
+            console.error('Erro ao carregar página de edição:', error);
+            res.status(500).send('Erro interno');
+        }
+    }
+
+
+    static async aplicarCupom(req, res) {
+        try {
+            const { codigo, valor } = req.body;
+
+            const cupom = await Cupom.findByCodigo(codigo);
+
+            if (!cupom) {
+                return res.status(404).json({ message: 'Cupom inválido' });
+            }
+
+            const desconto = (valor * cupom.porcentagem) / 100;
+            const valorFinal = valor - desconto;
+
+            res.json({
+                valorOriginal: valor,
+                porcentagem: cupom.porcentagem,
+                valorFinal: valorFinal
+            });
+
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Erro ao aplicar cupom' });
+        }
+    }
+
 }
 
 export default CupomController;

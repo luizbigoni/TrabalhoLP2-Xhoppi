@@ -30,7 +30,9 @@ class FuncionarioController{
 
     static async createFuncionario(req,res){
         try{
-            const {nome,sobrenome,cpf,dataNascimento,telefone,cargo,salario,email,senha,fotoPerfil}=req.body;
+            const {nome,sobrenome,cpf,dataNascimento,telefone,cargo,salario,email,senha}=req.body;
+            const fotoPerfil = req.file ? req.file.filename : 'padrao.png';
+
             const funcionarioExistente=await Funcionario.findByCpf(cpf);
 
             if(funcionarioExistente){
@@ -47,19 +49,32 @@ class FuncionarioController{
             res.status(500).send('Erro interno ao salvar funcionario');
         }
     }
-    static async updateFuncionario(req,res){
-        try{
-            const {id} = req.params;
-            const dadosAtualizados = req.body;
-            const funcionarioAtualizado = await Funcionario.update(id, dadosAtualizados);
+    static async updateFuncionario(req, res) {
+        try {
+            const { id } = req.params;
 
-            if(!funcionarioAtualizado){
-                return res.status(404).json({message: 'Funcionario não encontrado para atualização'});
+            const dadosAtualizados = {
+                nome: req.body.nome,
+                email: req.body.email,
+                cargo: req.body.cargo,
+                salario: req.body.salario
+            };
+
+            if (req.body.senha && req.body.senha.trim() !== "") {
+                dadosAtualizados.senha = req.body.senha;
             }
-            res.json({message: 'Funcionario atualizado com sucesso!', funcionario: funcionarioAtualizado});
-        }catch(error){
-            console.error('Erro ao atualizar funcionario', error);
-            res.status(500).json({ message: 'Erro interno ao atualizar funcionario'});
+
+            if (req.file) {
+                dadosAtualizados.fotoPerfil = req.file.filename;
+            }
+
+            await Funcionario.update(id, dadosAtualizados);
+
+            res.json({ message: "Funcionário atualizado com sucesso!" });
+
+        } catch (error) {
+            console.error("Erro ao atualizar funcionário:", error);
+            res.status(500).json({ message: "Erro interno" });
         }
     }
     static async deleteFuncionario(req,res){
@@ -90,6 +105,21 @@ class FuncionarioController{
             res.render('visualizar-funcionario', {funcionarios: funcionarios});
         }catch (error){
             console.error('Erro ao carregar a página:', error);
+            res.status(500).send('Erro interno');
+        }
+    }
+    static async renderEditFuncionario(req, res) {
+        try {
+            const { id } = req.params;
+            const funcionarioExistente = await Funcionario.findById(id); 
+
+            if (!funcionarioExistente) {
+                return res.status(404).send('Funcionário não encontrado!');
+            }
+
+            res.render('editar-funcionario', { funcionario: funcionarioExistente });
+        } catch (error) {
+            console.error('Erro ao carregar a página de edição:', error);
             res.status(500).send('Erro interno');
         }
     }
