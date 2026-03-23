@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>Xhopii - Editar Cliente</title>
+</head>
+<body>
+
+    <header>
+        <section id="cabecalho-logo">
+            <img src="/img/logo.png">
+            <h1>Xhopii</h1>
+        </section>
+        <section id="cabecalho-logout">
+            <a href="/login">Sair</a>
+        </section>
+    </header>
+
+    <nav class="menu-horizontal">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/clientes/cadastrar">Cadastro Cliente</a></li>
+            <li><a href="/funcionario/cadastrar">Cadastro Funcionário</a></li>
+            <li><a href="/produto/cadastrar">Cadastro Produto</a></li>
+            <li><a href="/cupom/cadastrar">Cadastro Cupom</a></li>
+            <li><a href="/clientes-list">Ver Clientes</a></li>
+            <li><a href="/funcionarios-list">Ver Funcionários</a></li>
+            <li><a href="/produtos-list">Ver Produtos</a></li>
+            <li><a href="/cupons-list">Ver Cupons</a></li>
+        </ul>
+    </nav>
+
+    <section class="conteudo-cadastro">
+        <section class="conteudo-formulario-cadastro">
+            
+            <form id="form-editar-cliente" data-id="<%= cliente._id %>" enctype="multipart/form-data">
+                <label>Editar Cliente</label>
+                
+                <input type="text" placeholder="Nome" name="nome" value="<%= cliente.nome %>" required>
+                <input type="text" placeholder="Sobrenome" name="sobrenome" value="<%= cliente.sobrenome %>" required>
+                <input type="text" placeholder="CPF" name="CPF" value="<%= cliente.CPF %>" required> 
+                <input type="date" placeholder="Data Nascimento" name="dataNascimento" value="<%= cliente.dataNascimento %>" required>
+                <input type="text" placeholder="Telefone" name="telefone" value="<%= cliente.telefone %>" required>
+                <input type="text" placeholder="Email" name="email" value="<%= cliente.email %>" required>
+                
+                <label>Nova Senha (deixe em branco para não alterar):</label>
+                <input type="password" placeholder="Nova Senha" name="senha">
+                
+                <label>Foto atual:</label>
+                <img src="/img/<%= cliente.inputFoto %>" width="120" style="margin: 10px 0; border-radius: 8px;">
+
+                <label>Alterar foto:</label>
+                <input type="file" name="fotoPerfil" accept="image/*">
+                
+                <button type="button" id="btn-salvar-cliente" style="padding: 10px; background-color: #ff6600; color: white; border: none; cursor: pointer;">Salvar Alterações</button>
+            </form>
+
+        </section>
+    </section>
+
+    <script src="/js/editarCliente.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="icon" href="/img/logo.png" type="image/png">
+    <title>Xhopii - Ver Produtos</title>
+</head>
+
+<body>
+
+    <header>
+        <section id="cabecalho-logo">
+            <img src="/img/logo.png">
+            <h1>Xhopii</h1>
+        </section>
+        <section id="cabecalho-logout">
+            <a href="/login">Sair</a>
+        </section>
+    </header>
+
+    <nav class="menu-horizontal">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/clientes/cadastrar">Cadastro Cliente</a></li>
+            <li><a href="/funcionario/cadastrar">Cadastro Funcionário</a></li>
+            <li><a href="/produto/cadastrar">Cadastro Produto</a></li>
+            <li><a href="/cupom/cadastrar">Cadastro Cupom</a></li>
+            <li><a href="/clientes-list">Ver Clientes</a></li>
+            <li><a href="/funcionarios-list">Ver Funcionários</a></li>
+            <li><a href="/produtos-list">Ver Produtos</a></li>
+            <li><a href="/cupons-list">Ver Cupons</a></li>
+        </ul>
+    </nav>
+
+    <section class="conteudo-ver">
+        <section class="conteudo-ver-descobertas">
+            <section class="conteudo-ver-descobertas-titulo">
+                <h1>Produtos</h1>
+            </section>
+            
+            <section class="conteudo-ver-descobertas-produto">
+                <% if (produtos && produtos.length > 0) { %>
+                    
+                    <% produtos.forEach(produto => { %>
+                        <div class="ver-produto-item-grid" style="position: relative;">
+                            <a href="/produtos/<%= produto._id %>" style="text-decoration: none; color: inherit;">
+                                <section class="ver-produto-detalhes">
+                                    <img src="/img/<%= produto.foto %>" alt="Foto do Produto">
+                                    <p id="nome-produto"><%= produto.nome %></p>
+                                    
+                                    <section class="ver-grupo-dupla-grid">
+                                        <h5 id="titulo-produto">Fabricante: </h5>
+                                        <p id="info-produto"><%= produto.fabricante %></p>
+                                    </section>
+                                    
+                                    <section class="ver-grupo-dupla-grid">
+                                        <h5 id="titulo-produto">Descrição:</h5>
+                                        <p id="info-produto"><%= produto.descricao %></p>
+                                    </section>
+                                    
+                                    <section class="ver-produto-item-info">
+                                        <p id="valor">R$ <%= produto.valor %></p>
+                                        <p id="disponiveis"><%= produto.quantidade %> disponíveis</p>
+                                    </section>
+                                </section>
+                            </a>
+
+                            <div style="margin-top: 10px; display: flex; justify-content: space-between; padding: 0 10px;">
+                                <a href="/produtos/editar/<%= produto._id %>" style="color: blue; text-decoration: none; font-weight: bold;">✏️ Editar</a>
+                                
+                                <button class="btn-excluir" data-id="<%= produto._id %>">
+                                    🗑️ Excluir
+                                </button>
+                            </div>
+                        </div>
+                    <% }) %>
+
+                <% } else { %>
+                    <p style="margin-top: 20px; color: #666; width: 100%; text-align: center;">Nenhum produto cadastrado na loja ainda.</p>
+                <% } %>
+            </section>
+
+        </section>
+    </section>
+
+    <footer class="rodape">
+        <p>© 2026 Xhopii. Todos os direitos acadêmicos reservados</p>
+    </footer>
+
+    <script src="/js/excluir.js"></script>
+
+</body>
+</html>

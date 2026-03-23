@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>Xhopii - Editar Cupom</title>
+</head>
+<body>
+
+<header>
+    <section id="cabecalho-logo">
+        <img src="/img/logo.png">
+        <h1>Xhopii</h1>
+    </section>
+    <section id="cabecalho-logout">
+        <a href="/login">Sair</a>
+    </section>
+</header>
+
+<nav class="menu-horizontal">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/clientes/cadastrar">Cadastro Cliente</a></li>
+            <li><a href="/funcionario/cadastrar">Cadastro Funcionário</a></li>
+            <li><a href="/produto/cadastrar">Cadastro Produto</a></li>
+            <li><a href="/cupom/cadastrar">Cadastro Cupom</a></li>
+            <li><a href="/clientes-list">Ver Clientes</a></li>
+            <li><a href="/funcionarios-list">Ver Funcionários</a></li>
+            <li><a href="/produtos-list">Ver Produtos</a></li>
+            <li><a href="/cupons-list">Ver Cupons</a></li>
+        </ul>
+    </nav>
+
+<section class="conteudo-cadastro">
+    <section class="conteudo-formulario-cadastro">
+        
+        <form id="form-editar-cupom">
+            <label>Editar Cupom</label>
+
+            <!-- ID escondido -->
+            <input type="hidden" id="cupomId" value="<%= cupom._id %>">
+
+            <input type="text" 
+                   id="codigo"
+                   placeholder="Código do Cupom" 
+                   value="<%= cupom.codigo %>" 
+                   required>
+
+            <input type="text" 
+                   id="descricao"
+                   placeholder="Descrição" 
+                   value="<%= cupom.descricao %>" 
+                   required>
+
+            <input type="number" 
+                   id="porcentagem"
+                   placeholder="Desconto (%)" 
+                   value="<%= cupom.porcentagem %>" 
+                   required>
+
+            <button type="submit" 
+                style="padding: 10px; background-color: #ff6600; color: white; border: none; cursor: pointer;">
+                Salvar Alterações
+            </button>
+        </form>
+
+    </section>
+</section>
+
+<script src="/js/editarCupom.js"></script>
+
+</body>
+</html>
